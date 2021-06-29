@@ -1,10 +1,10 @@
-import { Router } from "./Components/Router";
 import React from "react";
+import { Home } from "./Components/Home";
 
 const App = () => {
   return (
     <div className="App">
-      <Router />
+      <Home />
     </div>
   );
 };
