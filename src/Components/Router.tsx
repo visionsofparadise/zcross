@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Services } from "./Services";
 import { Clients } from "./Clients";
 import { Crew } from "./Crew";
-import Wrapper from "./Wrapper";
+import { Wrapper } from "./Wrapper";
 
 export const Router: FC = () => {
   return (
