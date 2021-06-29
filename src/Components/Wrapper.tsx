@@ -37,7 +37,7 @@ export const Wrapper: React.FC = ({ children }) => (
         <div className="my-5 text-center">
           <h4>
             For a quote, contact{" "}
-            <a href="mailto:matt@zcross.media">matt@zcross.media</a>
+            <a href="mailto:contact@zcross.media">contact@zcross.media</a>
           </h4>
         </div>
       </div>
