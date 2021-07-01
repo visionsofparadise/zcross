@@ -1,10 +1,13 @@
 import React from "react";
 import { Home } from "./Components/Home";
+import FadeIn from "react-fade-in";
 
 const App = () => {
   return (
     <div className="App">
-      <Home />
+      <FadeIn>
+        <Home />
+      </FadeIn>
     </div>
   );
 };
