@@ -6,19 +6,19 @@ import { AudioPlayer } from "./AudioPlayer";
 export const Services: FC = () => (
   <div className="text-center">
     <div className="mb-5">
-      <h6 className="text-muted">- Music -</h6>
+      <h5 className="text-muted">- Music -</h5>
     </div>
     <div className="row">
       <div className="col-md-6">
         <div className="mb-5">
-          <h5>Mixing</h5>
+          <h6>Mixing</h6>
           <p>
             Working with the individual elements of your work to make them sound
             great together.
           </p>
         </div>
         <div className="mb-5">
-          <h5>Mastering</h5>
+          <h6>Mastering</h6>
           <p>
             Applying processing to the master track to standardize and bring the
             audio to industry specifications.
@@ -27,7 +27,7 @@ export const Services: FC = () => (
       </div>
       <div className="col-md-6">
         <div className="mb-5">
-          <h5>Feedback & Coaching</h5>
+          <h6>Feedback & Coaching</h6>
           <p>
             Detailed technical feedback to improve your tracks and help you
             learn along the way.
@@ -47,12 +47,12 @@ export const Services: FC = () => (
     <br />
 
     <div className="mb-5">
-      <h6 className="text-muted">- Voice -</h6>
+      <h5 className="text-muted">- Voice -</h5>
     </div>
     <div className="row">
       <div className="col-md-6">
         <div className="mb-5">
-          <h5>Audio Processing</h5>
+          <h6>Audio Processing</h6>
           <p>
             Removal of unwanted noise such as background noise, hum, plosives,
             esses, clicks, reverb and more, as well as enhancement of audio such
@@ -93,7 +93,7 @@ export const Services: FC = () => (
           </table>
         </div>
         <div className="mb-5">
-          <h5>Audio Editing</h5>
+          <h6>Audio Editing</h6>
           <p>
             Removal of unwanted speech, breaths, silences and unwanted content.
             Rearranging the audio so that it flows smoothly without
@@ -133,7 +133,7 @@ export const Services: FC = () => (
           </table>
         </div>
         <div className="mb-5">
-          <h5>Content Production & Selection</h5>
+          <h6>Content Production & Selection</h6>
           <p>
             Producing custom content such as intros, outros, ads and custom
             segments with original music and voiceover.
@@ -146,7 +146,7 @@ export const Services: FC = () => (
       </div>
       <div className="col-md-6">
         <div className="mb-5">
-          <h5>Audiograms & Graphics</h5>
+          <h6>Audiograms & Graphics</h6>
           <p>
             Audiograms are highlight clips in video form. They are the best way
             to promote your content and go viral on social media.
@@ -179,14 +179,14 @@ export const Services: FC = () => (
           </table>
         </div>
         <div className="mb-5">
-          <h5>Sound Mixing</h5>
+          <h6>Sound Mixing</h6>
           <p>
             Making sure that different sounds such as music and voice are
             balanced and sit harmoniously together.
           </p>
         </div>
         <div className="mb-5">
-          <h5>Scheduling & Extras</h5>
+          <h6>Scheduling & Extras</h6>
           <p>
             Handling the posting and scheduling of your audio content to hosting
             and social media sites. We can also handle auxilary tasks such as

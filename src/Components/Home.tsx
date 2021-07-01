@@ -18,7 +18,7 @@ export const Home: React.FC = () => {
             <div className="col-md-2"></div>
             <div className="col-2"></div>
             <div className="col">
-              <div className="d-flex justify-content-center mt-5">
+              <div className="d-flex justify-content-center mt-5 p-5">
                 <img
                   src={zcrossIconBlack}
                   className="card-img-top mt-5"
@@ -50,7 +50,7 @@ export const Home: React.FC = () => {
           <br />
           <br />
 
-          <h6 className="text-muted text-center mb-5">- Contact -</h6>
+          <h5 className="text-muted text-center mb-5">- Contact -</h5>
           <div className="d-flex justify-content-center mb-5">
             <a href={`mailto:${email}`}>
               <span className="h4 text-primary mr-3 align-middle">{email}</span>
@@ -67,17 +67,19 @@ export const Home: React.FC = () => {
           <br />
           <br />
 
-          <h6 className="text-muted text-center mb-5">- Clients -</h6>
-          <Clients />
+          <div className="row">
+            <div className="col-md">
+              <h5 className="text-muted text-center mb-5">- Clients -</h5>
+              <Clients />
+            </div>
+            <div className="col-md">
+              <h6 className="text-muted text-center mb-5">
+                {"- Labels we have worked with -"}
+              </h6>
+              <Labels />
+            </div>
+          </div>
 
-          <h6 className="text-muted text-center mb-5">
-            {"- Labels we have worked with -"}
-          </h6>
-          <Labels />
-
-          <br />
-          <br />
-          <br />
           <br />
           <br />
 
