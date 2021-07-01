@@ -67,7 +67,7 @@ export const Home: React.FC = () => {
           <br />
           <br />
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md">
               <h5 className="text-muted text-center mb-5">- Clients -</h5>
               <Clients />
@@ -81,7 +81,7 @@ export const Home: React.FC = () => {
           </div>
 
           <br />
-          <br />
+          <br /> */}
 
           <div className="row">
             <div className="col-md-2"></div>
