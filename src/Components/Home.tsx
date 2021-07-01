@@ -18,7 +18,7 @@ export const Home: React.FC = () => {
             <div className="col-md-2"></div>
             <div className="col-2"></div>
             <div className="col">
-              <div className="d-flex justify-content-center mt-5 p-5">
+              <div className="d-flex justify-content-center mt-5 p-3">
                 <img
                   src={zcrossIconBlack}
                   className="card-img-top mt-5"
