@@ -50,7 +50,7 @@ export const Home: React.FC = () => {
           <br />
           <br />
 
-          <h5 className="text-muted text-center mb-5">- Contact -</h5>
+          {/* <h5 className="text-muted text-center mb-5">- Contact -</h5> */}
           <div className="d-flex justify-content-center mb-5">
             <a href={`mailto:${email}`}>
               <span className="h4 text-primary mr-3 align-middle">{email}</span>

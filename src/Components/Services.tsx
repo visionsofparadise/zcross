@@ -1,12 +1,11 @@
 import React, { FC } from "react";
-import ReactAudioPlayer from "react-audio-player";
 import ReactPlayer from "react-player/lazy";
 import { AudioPlayer } from "./AudioPlayer";
 
 export const Services: FC = () => (
   <div className="text-center">
     <div className="mb-5">
-      <h5 className="text-muted">- Music -</h5>
+      <h6 className="text-muted">- Music -</h6>
     </div>
     <div className="row">
       <div className="col-md-6">
@@ -47,7 +46,7 @@ export const Services: FC = () => (
     <br />
 
     <div className="mb-5">
-      <h5 className="text-muted">- Voice -</h5>
+      <h6 className="text-muted">- Voice -</h6>
     </div>
     <div className="row">
       <div className="col-md-6">
