@@ -8,8 +8,8 @@ interface Props {
 export const Client: FC<Props> = ({ name, url }) =>
   url ? (
     <a href={url} rel="noreferrer" target="_blank">
-      <p className="mb-1">- {name}</p>
+      <p className="mb-1">{name}</p>
     </a>
   ) : (
-    <p className="mb-1">- {name}</p>
+    <p className="mb-1">{name}</p>
   );

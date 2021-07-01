@@ -5,48 +5,7 @@ import { AudioPlayer } from "./AudioPlayer";
 export const Services: FC = () => (
   <div className="text-center">
     <div className="mb-5">
-      <h6 className="text-muted">- Music -</h6>
-    </div>
-    <div className="row">
-      <div className="col-md-6">
-        <div className="mb-5">
-          <h6>Mixing</h6>
-          <p>
-            Working with the individual elements of your work to make them sound
-            great together.
-          </p>
-        </div>
-        <div className="mb-5">
-          <h6>Mastering</h6>
-          <p>
-            Applying processing to the master track to standardize and bring the
-            audio to industry specifications.
-          </p>
-        </div>
-      </div>
-      <div className="col-md-6">
-        <div className="mb-5">
-          <h6>Feedback & Coaching</h6>
-          <p>
-            Detailed technical feedback to improve your tracks and help you
-            learn along the way.
-          </p>
-          <p>
-            Campaign specific advice regarding marketing and public relations,
-            to help you make an impact with your art.
-          </p>
-          <p>
-            Career advice for musicians and artists looking to take a step up in
-            their career.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <br />
-
-    <div className="mb-5">
-      <h6 className="text-muted">- Voice -</h6>
+      <h6 className="text-muted">- Services -</h6>
     </div>
     <div className="row">
       <div className="col-md-6">
