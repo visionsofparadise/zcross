@@ -18,7 +18,7 @@ export const Services: FC = () => (
             voice-deepening and more.
           </p>
 
-          <table className="table table-borderless">
+          {/* <table className="table table-borderless">
             <thead>
               <tr>
                 <th
@@ -48,7 +48,7 @@ export const Services: FC = () => (
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
         </div>
         <div className="mb-5">
           <h6>Audio Editing</h6>
@@ -58,7 +58,7 @@ export const Services: FC = () => (
             distractions.
           </p>
 
-          <table className="table table-borderless">
+          {/* <table className="table table-borderless">
             <thead>
               <tr>
                 <th
@@ -88,7 +88,7 @@ export const Services: FC = () => (
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
         </div>
         <div className="mb-5">
           <h6>Content Production & Selection</h6>
@@ -114,7 +114,7 @@ export const Services: FC = () => (
             as covers and thumbnails.
           </p>
 
-          <table className="table table-borderless">
+          {/* <table className="table table-borderless">
             <thead>
               <tr>
                 <th scope="col" className="text-center small text-muted p-2">
@@ -134,7 +134,7 @@ export const Services: FC = () => (
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
         </div>
         <div className="mb-5">
           <h6>Sound Mixing</h6>
