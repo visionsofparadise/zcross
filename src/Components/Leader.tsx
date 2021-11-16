@@ -8,7 +8,7 @@ export const Leader: React.FC = () => {
         <div className="col-md-2"></div>
         <div className="col-2"></div>
         <div className="col">
-          <div className="d-flex justify-content-center mt-5 p-3">
+          <div className="d-flex justify-content-center p-3">
             <img
               src={zcrossIconBlack}
               className="card-img-top mt-5"
@@ -20,9 +20,15 @@ export const Leader: React.FC = () => {
         <div className="col-md-2"></div>
       </div>
 
-      <div className="mb-5 text-center">
-        <h5 className="mb-1">ƵCROSS</h5>
-        <p>Audio editing and engineering</p>
+      <div className="mb-3 text-center">
+        <h5 className="mb-3">ƵCROSS</h5>
+        <p>
+          Audio content production by{" "}
+          <a href="https://mattcavender.com" target="__blank" rel="noreferrer">
+            Matt Cavender
+          </a>
+          , certified in cloud computing and coding.
+        </p>
       </div>
     </>
   );
