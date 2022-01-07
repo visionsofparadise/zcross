@@ -27,7 +27,7 @@ export const Leader: React.FC = () => {
           <a href="https://mattcavender.com" target="__blank" rel="noreferrer">
             Matt Cavender
           </a>
-          , certified in cloud computing and coding.
+          , specialized in computing and technology.
         </p>
       </div>
     </>
