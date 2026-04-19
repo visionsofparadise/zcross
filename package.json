@@ -3,7 +3,6 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"aws-amplify": "3.3.11",
 		"bootstrap": "^4.6.0",
 		"react": "^17.0.1",
 		"react-copy-to-clipboard": "^5.0.3",
