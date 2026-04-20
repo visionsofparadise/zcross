@@ -7,14 +7,22 @@
   pointer-events: none;
 }
 
-/* SVG fallback when WebGL is unavailable — mirrors the 3D glyph's spot in
-   the left-half of the viewport, rotated 30° anticlockwise */
-.fallback {
+/* Raw-WebGL background shader canvas — sits behind the glyph canvas. */
+.bgShader {
   position: absolute;
-  top: 50%;
-  left: 25%;
-  width: 48vmin;
-  height: 48vmin;
-  transform: translate(-50%, -50%) rotate(-33deg);
-  opacity: 0.92;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Canvas2D glyph renderer — overlaid on top of the background shader. */
+.glyphCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
 }

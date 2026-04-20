@@ -1,32 +1,43 @@
-import * as THREE from 'three';
+// One-time offline bake: turns the Ƶ glyph into a deduplicated wireframe edge
+// list and writes it to public/glyph.bin.
+//
+// Runtime (GlyphCanvas2D) fetches the blob and renders it with Canvas 2D,
+// avoiding the three.js ExtrudeGeometry / WireframeGeometry runtime cost for
+// the glyph (the background shader still uses three).
+//
+// Format:
+//   uint32 LE  edgeCount
+//   Float32[]  edgeCount * 6   (2 verts × 3 coords, little-endian)
+//
+// The path parser + buildGlyphShapes logic is inlined from
+// src/three/glyphPath.ts to keep this runnable as plain Node ESM without a
+// TS loader. Duplicating ~100 lines is fine for a throwaway tool.
 
-// Pre-extracted Ƶ glyph from Inter Tight @ 2048 unitsPerEm.
-// viewBox 42 -708 508 708  → path is authored in +Y-up space via scale(1 -1).
-export const GLYPH_SVG =
+import * as THREE from 'three';
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const PROJECT_ROOT = resolve(__dirname, '..');
+
+// ---- Copied verbatim from src/three/glyphPath.ts ------------------------
+
+const GLYPH_SVG =
   'M550 708Q495 706 429.5 705.5Q364 705 307 705H227Q183 705 139 706Q95 707 58 708Q62 670 63.5 634.5Q65 599 65 580Q65 556 64.5 535Q64 514 62 498H85Q90 550 99 586Q108 622 125.5 643.5Q143 665 172.5 675Q202 685 249 685H444L249.95 364H77V344H237.86L42 20V0Q99 2 164.5 2.5Q230 3 289 3H369.5Q413 3 457 2.5Q501 2 538 0Q534 38 532.5 73.5Q531 109 531 128Q531 179 534 210H511Q506 158 497 122Q488 86 470.5 64.5Q453 43 423.5 33Q394 23 347 23H151L343.6 344H515V364L355.6 364L550 688Z';
 
 const TARGET_SIZE = 2.4;
 
-type Seg =
-  | { type: 'L'; pts: [number, number] }
-  | { type: 'Q'; pts: [number, number, number, number] }
-  | { type: 'C'; pts: [number, number, number, number, number, number] };
-
-interface SubPath {
-  start: [number, number];
-  segs: Seg[];
-}
-
-function parseSvgPath(d: string): SubPath[] {
-  const subs: SubPath[] = [];
-  let cur: SubPath | null = null;
+function parseSvgPath(d) {
+  const subs = [];
+  let cur = null;
   let startX = 0,
     startY = 0,
     cx = 0,
     cy = 0;
   const tokens = d.match(/[MLHVQCZ]|-?\d*\.?\d+/g) || [];
   let i = 0;
-  let cmd: string | null = null;
+  let cmd = null;
   while (i < tokens.length) {
     const t = tokens[i];
     if (/[MLHVQCZ]/i.test(t)) {
@@ -48,23 +59,23 @@ function parseSvgPath(d: string): SubPath[] {
     } else if (cmd === 'L') {
       const x = num(),
         y = num();
-      cur!.segs.push({ type: 'L', pts: [x, y] });
+      cur.segs.push({ type: 'L', pts: [x, y] });
       cx = x;
       cy = y;
     } else if (cmd === 'H') {
       const x = num();
-      cur!.segs.push({ type: 'L', pts: [x, cy] });
+      cur.segs.push({ type: 'L', pts: [x, cy] });
       cx = x;
     } else if (cmd === 'V') {
       const y = num();
-      cur!.segs.push({ type: 'L', pts: [cx, y] });
+      cur.segs.push({ type: 'L', pts: [cx, y] });
       cy = y;
     } else if (cmd === 'Q') {
       const x1 = num(),
         y1 = num(),
         x = num(),
         y = num();
-      cur!.segs.push({ type: 'Q', pts: [x1, y1, x, y] });
+      cur.segs.push({ type: 'Q', pts: [x1, y1, x, y] });
       cx = x;
       cy = y;
     } else if (cmd === 'C') {
@@ -74,7 +85,7 @@ function parseSvgPath(d: string): SubPath[] {
         y2 = num(),
         x = num(),
         y = num();
-      cur!.segs.push({ type: 'C', pts: [x1, y1, x2, y2, x, y] });
+      cur.segs.push({ type: 'C', pts: [x1, y1, x2, y2, x, y] });
       cx = x;
       cy = y;
     } else if (cmd === 'Z') {
@@ -89,8 +100,8 @@ function parseSvgPath(d: string): SubPath[] {
   return subs;
 }
 
-function sampleSub(sp: SubPath): number[][] {
-  const pts: number[][] = [[sp.start[0], sp.start[1]]];
+function sampleSub(sp) {
+  const pts = [[sp.start[0], sp.start[1]]];
   let px = sp.start[0],
     py = sp.start[1];
   sp.segs.forEach((s) => {
@@ -131,7 +142,7 @@ function sampleSub(sp: SubPath): number[][] {
   return pts;
 }
 
-function signedArea(pts: number[][]): number {
+function signedArea(pts) {
   let a = 0;
   for (let i = 0; i < pts.length; i++) {
     const [x1, y1] = pts[i],
@@ -141,7 +152,7 @@ function signedArea(pts: number[][]): number {
   return a * 0.5;
 }
 
-function pointInPoly(x: number, y: number, poly: number[][]): boolean {
+function pointInPoly(x, y, poly) {
   let inside = false;
   for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
     const [xi, yi] = poly[i],
@@ -154,20 +165,14 @@ function pointInPoly(x: number, y: number, poly: number[][]): boolean {
   return inside;
 }
 
-interface Framed {
-  sp: SubPath;
-  pts: number[][];
-  area: number;
-}
-
-export function buildGlyphShapes(): THREE.Shape[] {
+function buildGlyphShapes() {
   const subs = parseSvgPath(GLYPH_SVG);
 
   let minX = Infinity,
     maxX = -Infinity,
     minY = Infinity,
     maxY = -Infinity;
-  const framed: Framed[] = subs.map((sp) => {
+  const framed = subs.map((sp) => {
     const pts = sampleSub(sp);
     pts.forEach(([x, y]) => {
       if (x < minX) minX = x;
@@ -181,8 +186,8 @@ export function buildGlyphShapes(): THREE.Shape[] {
   const scale = TARGET_SIZE / (maxY - minY);
   const mx = (minX + maxX) * 0.5;
   const my = (minY + maxY) * 0.5;
-  const tx = (x: number) => (x - mx) * scale;
-  const ty = (y: number) => (y - my) * scale;
+  const tx = (x) => (x - mx) * scale;
+  const ty = (y) => (y - my) * scale;
 
   const biggest = framed.reduce((a, b) =>
     Math.abs(a.area) > Math.abs(b.area) ? a : b,
@@ -194,7 +199,7 @@ export function buildGlyphShapes(): THREE.Shape[] {
         start: [rev[0][0], rev[0][1]],
         segs: rev
           .slice(1)
-          .map((p) => ({ type: 'L', pts: [p[0], p[1]] }) as Seg),
+          .map((p) => ({ type: 'L', pts: [p[0], p[1]] })),
       };
       f.pts = rev;
       f.area = -f.area;
@@ -204,7 +209,7 @@ export function buildGlyphShapes(): THREE.Shape[] {
   const outers = framed.filter((f) => f.area > 0);
   const holes = framed.filter((f) => f.area < 0);
 
-  const runPath = (target: THREE.Shape | THREE.Path, sp: SubPath) => {
+  const runPath = (target, sp) => {
     target.moveTo(tx(sp.start[0]), ty(sp.start[1]));
     sp.segs.forEach((s) => {
       if (s.type === 'L') {
@@ -229,7 +234,7 @@ export function buildGlyphShapes(): THREE.Shape[] {
     });
   };
 
-  const shapes: THREE.Shape[] = [];
+  const shapes = [];
   outers.forEach((outer) => {
     const shape = new THREE.Shape();
     runPath(shape, outer.sp);
@@ -245,3 +250,49 @@ export function buildGlyphShapes(): THREE.Shape[] {
   });
   return shapes;
 }
+
+// ---- Bake ---------------------------------------------------------------
+
+// Mirror Scene3D.tsx lines 51–57
+const DEPTH_IN = 0.08;
+const DEPTH = Math.max(0.05, 0.05 + DEPTH_IN * 1.3);
+
+const shapes = buildGlyphShapes();
+const geo = new THREE.ExtrudeGeometry(shapes, {
+  depth: DEPTH,
+  bevelEnabled: false,
+  curveSegments: 3,
+  steps: Math.max(2, Math.round(DEPTH * 6)),
+});
+geo.center();
+geo.computeBoundingBox();
+console.log('bounding box (after .center()):', geo.boundingBox);
+
+const wire = new THREE.WireframeGeometry(geo);
+const posAttr = wire.attributes.position;
+const count = posAttr.count; // total vertices, comes in pairs
+if (count % 2 !== 0) {
+  throw new Error(`Wireframe vertex count is odd: ${count}`);
+}
+const edgeCount = count / 2;
+
+// Pack: uint32 LE header + float32 LE payload
+const payloadFloats = count * 3;
+const headerBytes = 4;
+const payloadBytes = payloadFloats * 4;
+const buf = new ArrayBuffer(headerBytes + payloadBytes);
+const dv = new DataView(buf);
+dv.setUint32(0, edgeCount, true);
+const floats = new Float32Array(buf, headerBytes, payloadFloats);
+const src = posAttr.array;
+for (let i = 0; i < payloadFloats; i++) {
+  floats[i] = src[i];
+}
+
+const outPath = resolve(PROJECT_ROOT, 'public', 'glyph.bin');
+mkdirSync(dirname(outPath), { recursive: true });
+writeFileSync(outPath, new Uint8Array(buf));
+
+console.log(`edges: ${edgeCount}`);
+console.log(`bytes: ${buf.byteLength}`);
+console.log(`wrote ${outPath}`);

@@ -13,16 +13,13 @@
     "@fontsource-variable/fraunces": "^5.2.9",
     "@fontsource-variable/inter-tight": "^5.2.7",
     "@fontsource/jetbrains-mono": "^5.2.8",
-    "@react-three/fiber": "^9.6.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "three": "^0.184.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@types/three": "^0.184.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",
