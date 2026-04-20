@@ -1,0 +1,73 @@
+/* shared section-transition base. Per-section accent is read from the
+   --sec-accent custom property set inline on the section element.
+   --sec-num-opacity defaults to 0.06 and can be overridden per section. */
+.section {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+.section:global(.active) {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.section:global(.leaving) {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+.secNum {
+  position: absolute;
+  top: -10px;
+  left: var(--sec-num-leak);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(160px, 22vw, 320px);
+  line-height: 0.85;
+  color: var(--sec-accent);
+  opacity: var(--sec-num-opacity, 0.06);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.secHead {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.26em;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.secHead::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--sec-accent);
+}
+.secHead .secIdx { color: var(--sec-accent); }
+
+.secBody {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 620px;
+}

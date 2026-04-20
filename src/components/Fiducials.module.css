@@ -1,0 +1,8 @@
+.root {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.root svg { width: 100%; height: 100%; }
+.tick { stroke: var(--line-2); stroke-width: 1; }
+.label { fill: var(--dim); font: 400 9px/1 'JetBrains Mono', monospace; letter-spacing: 0.12em; }

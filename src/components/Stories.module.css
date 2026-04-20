@@ -1,0 +1,22 @@
+/* right-side story container — pinned to right half on desktop; full width on mobile */
+.root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100vh;
+  z-index: 4;
+  overflow: hidden;
+  padding: var(--gutter-y) var(--gutter-x-tight) var(--gutter-y) var(--gutter-x);
+}
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .root {
+    width: 100vw;
+  }
+}

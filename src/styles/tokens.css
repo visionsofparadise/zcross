@@ -1,0 +1,36 @@
+:root {
+  /* palette (bone variant) */
+  --bg:        #efece5;
+  --fg:        #111113;
+  --dim:       #6a6861;
+  --line:      rgba(20,20,20,0.08);
+  --line-2:    rgba(20,20,20,0.16);
+  --accent-a:  #3b2a6a;
+  --accent-b:  #1f6e6a;
+  --accent-c:  #b8942b;
+  --pal-1:     #3a2a6a;
+  --pal-2:     #3b6ea5;
+  --pal-3:     #1f6e6a;
+  --pal-4:     #b8942b;
+  --pal-5:     #c64a2e;
+  --grain:     0.12;
+
+  /* spacing scale — referenced by story padding, header/footer edge, section ghost-number offset */
+  --gutter-x:        clamp(48px, 4.5vw, 80px);   /* story left-pad on desktop */
+  --gutter-x-tight:  clamp(120px, 9vw, 180px);   /* story right-pad on desktop */
+  --gutter-y:        clamp(84px, 10vh, 120px);   /* story top/bottom pad */
+  --edge-x:          28px;                        /* header/footer horizontal inset */
+  --edge-y:          22px;                        /* header/footer vertical inset */
+  --sec-num-leak:    -18px;                       /* how far the ghost "01" sits outside frame */
+}
+
+@media (max-width: 768px) {
+  :root {
+    --gutter-x:        40px;
+    --gutter-x-tight:  40px;
+    --gutter-y:        clamp(56px, 8vh, 88px);
+    --edge-x:          20px;
+    --edge-y:          18px;
+    --sec-num-leak:    -12px;
+  }
+}

@@ -1,0 +1,104 @@
+/* section 01 — hero masthead (shared section base lives in Section.module.css) */
+.displayBlock {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: clamp(36px, 10vw, 96px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 28px;
+  position: relative;
+}
+/* 3 independent sub-elements of the display block:
+   - content:        flush with the frame's left padding (top row)
+   - productionLine: block-level wrapper for the offset row, sets the x
+                     anchor for the tick (via padding-left)
+   - tick:           inline block sitting at the productionLine's left edge
+   - production:     the text after the tick; can be shifted left to
+                     visually align its glyph edge with the tick
+*/
+.content {
+  display: block;
+  /* compensate for Inter Tight's left side-bearing on C so visible glyph
+     hits the frame padding edge */
+  margin-left: -0.12em;
+}
+.productionLine {
+  display: block;
+  color: var(--dim);
+  padding-left: 0.5em;
+}
+.tick {
+  display: inline-block;
+  width: 0.5ch;
+  height: 0.5em;
+  background: var(--pal-5);
+  vertical-align: baseline;
+  transform: translateY(-0.1em);
+  /* pull following inline content back so its box starts at tick's left
+     edge (neutralizes the tick's own width in the flow) */
+  margin-right: -0.5ch;
+}
+.production {
+  /* independent nudge for the P text — positive pushes right,
+     negative pulls left past the tick's edge */
+  margin-left: -0.06em;
+}
+/* pair kerning: adds visual space after the T in CONTENT / PRODUCTION
+   without changing global letter-spacing */
+.kernTE {
+  margin-left: 0.05em;
+}
+.kernTI {
+  margin-left: 0.08em;
+}
+.heroMeta {
+  display: flex;
+  gap: 36px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding-top: 18px;
+  border-top: 1px solid var(--line-2);
+}
+.heroMeta .b { color: var(--fg); }
+.b { color: var(--fg); }
+.heroByline {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 12px 0 14px;
+  border-top: 2px solid var(--fg);
+  border-bottom: 1px solid var(--line-2);
+  margin-bottom: 24px;
+  max-width: 480px;
+}
+.heroBylineBar {
+  height: 48px;
+  background: var(--fg);
+}
+.heroBylineBody { display: flex; flex-direction: column; gap: 4px; }
+.heroBylineLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  color: var(--dim);
+}
+.heroBylineName {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: clamp(22px, 1.8vw, 28px);
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+/* at thinscreen, Inter Tight's side-bearings render differently and the
+   widescreen compensations produce overlap — drop them */
+@media (max-width: 768px) {
+  .production { margin-left: 0; }
+  .tick { margin-right: 0; }
+}

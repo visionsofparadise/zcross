@@ -1,0 +1,106 @@
+/* section 03 — capabilities (shared section base lives in Section.module.css).
+   .capsSection is attached to the <section> via the wrapper's className prop
+   so descendant selectors can target .active state locally. */
+.capsSection {}
+
+.capsHead {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-2);
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.capsHead .left { color: var(--accent-b); }
+.left { color: var(--accent-b); }
+.capsList {
+  list-style: none;
+  margin: 0; padding: 0;
+  width: 100%;
+}
+.capItem {
+  display: grid;
+  grid-template-columns: 46px 1fr auto 14px;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.capsSection:global(.active) .capItem { opacity: 1; transform: translateX(0); }
+/* stagger */
+.capsSection:global(.active) .capItem:nth-child(1) { transition-delay: 0.10s; }
+.capsSection:global(.active) .capItem:nth-child(2) { transition-delay: 0.16s; }
+.capsSection:global(.active) .capItem:nth-child(3) { transition-delay: 0.22s; }
+.capsSection:global(.active) .capItem:nth-child(4) { transition-delay: 0.28s; }
+.capsSection:global(.active) .capItem:nth-child(5) { transition-delay: 0.34s; }
+.capsSection:global(.active) .capItem:nth-child(6) { transition-delay: 0.40s; }
+.capsSection:global(.active) .capItem:nth-child(7) { transition-delay: 0.46s; }
+
+.capNum {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+}
+.capName {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: clamp(18px, 1.5vw, 22px);
+  letter-spacing: -0.005em;
+  color: var(--fg);
+  text-transform: uppercase;
+}
+.capBar {
+  width: 80px;
+  height: 2px;
+  background: var(--line-2);
+  position: relative;
+  overflow: hidden;
+}
+.capBar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-b);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* per-row pal color on each bar */
+.capItem:nth-child(1) .capBar::after { background: var(--pal-1); }
+.capItem:nth-child(2) .capBar::after { background: var(--pal-2); }
+.capItem:nth-child(3) .capBar::after { background: var(--pal-3); }
+.capItem:nth-child(4) .capBar::after { background: var(--pal-4); }
+.capItem:nth-child(5) .capBar::after { background: var(--pal-5); }
+.capItem:nth-child(6) .capBar::after { background: var(--pal-4); }
+.capItem:nth-child(7) .capBar::after { background: var(--pal-2); }
+.capsSection:global(.active) .capItem:nth-child(1) .capBar::after { transform: scaleX(0.95); transition-delay: 0.3s; }
+.capsSection:global(.active) .capItem:nth-child(2) .capBar::after { transform: scaleX(0.88); transition-delay: 0.36s; }
+.capsSection:global(.active) .capItem:nth-child(3) .capBar::after { transform: scaleX(0.82); transition-delay: 0.42s; }
+.capsSection:global(.active) .capItem:nth-child(4) .capBar::after { transform: scaleX(0.78); transition-delay: 0.48s; }
+.capsSection:global(.active) .capItem:nth-child(5) .capBar::after { transform: scaleX(0.72); transition-delay: 0.54s; }
+.capsSection:global(.active) .capItem:nth-child(6) .capBar::after { transform: scaleX(0.68); transition-delay: 0.60s; }
+.capsSection:global(.active) .capItem:nth-child(7) .capBar::after { transform: scaleX(0.62); transition-delay: 0.66s; }
+
+.capDot {
+  width: 6px; height: 6px;
+  background: var(--accent-b);
+  transform: rotate(45deg);
+  opacity: 0.85;
+}
+.capItem:nth-child(1) .capDot { background: var(--pal-1); }
+.capItem:nth-child(2) .capDot { background: var(--pal-2); }
+.capItem:nth-child(3) .capDot { background: var(--pal-3); }
+.capItem:nth-child(4) .capDot { background: var(--pal-4); }
+.capItem:nth-child(5) .capDot { background: var(--pal-5); }
+.capItem:nth-child(6) .capDot { background: var(--pal-4); }
+.capItem:nth-child(7) .capDot { background: var(--pal-2); }

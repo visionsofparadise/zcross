@@ -1,0 +1,75 @@
+/* section 02 — byline + domain (shared section base lives in Section.module.css) */
+.domIntro {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 18px;
+}
+.domIntro i { color: var(--pal-4); font-style: normal; }
+.domBig {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  line-height: 0.92;
+  color: var(--fg);
+}
+.domBig .italic {
+  font-style: italic;
+  font-size: clamp(38px, 9vw, 96px);
+  letter-spacing: -0.03em;
+  display: block;
+}
+.italic {
+  font-style: italic;
+  font-size: clamp(38px, 9vw, 96px);
+  letter-spacing: -0.03em;
+  display: block;
+}
+.domBig .amp {
+  font-style: italic;
+  color: var(--pal-1);
+  font-size: clamp(42px, 10vw, 104px);
+  line-height: 0.9;
+  padding: 0 0.1em;
+  text-shadow: 0 0 40px color-mix(in oklab, var(--pal-1) 45%, transparent);
+}
+.amp {
+  font-style: italic;
+  color: var(--pal-1);
+  font-size: clamp(42px, 10vw, 104px);
+  line-height: 0.9;
+  padding: 0 0.1em;
+  text-shadow: 0 0 40px color-mix(in oklab, var(--pal-1) 45%, transparent);
+}
+.domBig .sc {
+  font-variant: small-caps;
+  text-transform: lowercase;
+  font-size: clamp(34px, 8vw, 86px);
+  letter-spacing: 0.005em;
+  display: block;
+  margin-top: 4px;
+}
+.sc {
+  font-variant: small-caps;
+  text-transform: lowercase;
+  font-size: clamp(34px, 8vw, 86px);
+  letter-spacing: 0.005em;
+  display: block;
+  margin-top: 4px;
+}
+.domFoot {
+  margin-top: 20px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--dim);
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+.domFoot b {
+  color: var(--accent-b);
+  font-weight: 400;
+}
+.domFoot span { color: var(--dim); }

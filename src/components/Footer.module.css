@@ -1,0 +1,14 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+  padding: 0 var(--edge-x) var(--edge-y);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  z-index: 5;
+}
+.c { text-align: center; }
+.r { text-align: right; }
+.l {}

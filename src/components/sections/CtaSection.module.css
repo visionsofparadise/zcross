@@ -1,0 +1,81 @@
+/* section 04 — oversized CTA (shared section base lives in Section.module.css) */
+.ctaOver {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: clamp(44px, 14vw, 140px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+  margin-bottom: 0;
+  text-transform: lowercase;
+}
+.ctaOver .amp {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-b);
+  letter-spacing: -0.02em;
+  padding-right: 0.05em;
+}
+.ctaOver .period {
+  color: var(--pal-5);
+}
+.period {
+  color: var(--pal-5);
+}
+/* pair kerning: extra space between r and k in "work" */
+.kernRK {
+  margin-left: 0.05em;
+}
+.ctaEmail {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 44px;
+  padding: 22px 26px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: var(--bg);
+  background: var(--fg);
+  border: 1px solid var(--fg);
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease, transform .2s ease, letter-spacing .2s ease;
+}
+.ctaEmail:hover {
+  background: var(--accent-b);
+  border-color: var(--accent-b);
+  transform: translateX(3px);
+}
+.ctaEmail .arrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 22px;
+  transition: transform .2s ease;
+}
+.arrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 22px;
+  transition: transform .2s ease;
+}
+.ctaEmail:hover .arrow { transform: translateX(4px); }
+.ctaMeta {
+  display: flex;
+  gap: 36px;
+  margin-top: 36px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding-top: 18px;
+  border-top: 1px solid var(--line-2);
+  width: 100%;
+  max-width: 620px;
+}
+.ctaMeta b {
+  display: block;
+  color: var(--fg);
+  font-weight: 400;
+  margin-top: 4px;
+  letter-spacing: 0.18em;
+}
